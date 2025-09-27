@@ -1,0 +1,10 @@
+<h1>Turmas</h1>
+<ul>
+  {% for turma in turmas %}
+    <li>{{ turma.nome }}</li>
+  {% empty %}
+    <li>Nenhuma turma cadastrada.</li>
+  {% endfor %}
+</ul>
+<a href="{% url 'criar_turma' %}">+ Nova turma</a> |
+<a href="/atividades/">Ver atividades</a>

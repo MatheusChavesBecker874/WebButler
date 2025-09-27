@@ -1,0 +1,17 @@
+<h1>Criar Atividade</h1>
+<form method="post">
+  {% csrf_token %}
+  <p>Título: <input type="text" name="titulo"></p>
+  <p>Descrição: <textarea name="descricao"></textarea></p>
+  <p>
+    Turma:
+    <select name="turma">
+      <option value="">Todos os alunos</option>
+      {% for turma in turmas %}
+        <option value="{{ turma.id }}">{{ turma.nome }}</option>
+      {% endfor %}
+    </select>
+  </p>
+  <button type="submit">Salvar</button>
+</form>
+<a href="{% url 'lista_atividades' %}">Voltar</a>

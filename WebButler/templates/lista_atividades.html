@@ -1,0 +1,14 @@
+<h1>Atividades</h1>
+<ul>
+  {% for atividade in atividades %}
+    <li>
+      <strong>{{ atividade.titulo }}</strong> - {{ atividade.descricao }}
+      (Turma: {{ atividade.turma|default:"Todos os alunos" }})
+    </li>
+  {% empty %}
+    <li>Nenhuma atividade cadastrada.</li>
+  {% endfor %}
+</ul>
+<a href="{% url 'criar_atividade' %}">+ Nova atividade</a> |
+<a href="/turmas/">Ver turmas</a> |
+<a href="/alunos/">Ver alunos</a>
