@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Horários</title>
+</head>
+<body>
+    <h1>Editar horários da atividade: {{ atividade.titulo }}</h1>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <label for="horario_inicio">Horário de Início:</label>
+        <input type="time" name="horario_inicio" value="{{ atividade.horario_inicio|default:'' }}"><br><br>
+
+        <label for="horario_fim">Horário de Fim:</label>
+        <input type="time" name="horario_fim" value="{{ atividade.horario_fim|default:'' }}"><br><br>
+
+        <button type="submit">Salvar</button>
+    </form>
+
+    <br>
+    <a href="{% url 'lista_atividades' %}">⬅ Voltar para a lista</a>
+</body>
+</html>
