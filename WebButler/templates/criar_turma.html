@@ -1,7 +1,0 @@
-<h1>Criar Turma</h1>
-<form method="post">
-  {% csrf_token %}
-  <p>Nome: <input type="text" name="nome"></p>
-  <button type="submit">Salvar</button>
-</form>
-<a href="{% url 'lista_turmas' %}">Voltar</a>
