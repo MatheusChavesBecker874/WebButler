@@ -1,34 +1,46 @@
-<h1>Lista de Atividades</h1>
-<a href="/atividades/nova/">Criar nova atividade</a>
-<ul>
-    {% for atividade in atividades %}
-        <li>
-            <strong>{{ atividade.titulo }}</strong> - {{ atividade.descricao }}
-            <br> Progresso: {{ atividade.progresso }}%
+{% extends 'base.html' %}
 
-            <br>
-            {% if atividade.horario_inicio %}
-                Início: {{ atividade.horario_inicio|time:"H:i" }}
-            {% else %}
-                Início: -
-            {% endif %}
+{% block title %}Lista de Atividades{% endblock %}
 
-            {% if atividade.horario_fim %}
-                | Fim: {{ atividade.horario_fim|time:"H:i" }}
-            {% else %}
-                | Fim: -
-            {% endif %}
+{% block content %}
+<div class="container mt-5">
+    <div class="card p-4 shadow-sm">
+        <h2 class="mb-3">Lista de Atividades</h2>
+        <p class="mb-4">Visualizar atividades.</p>
 
-            <br>
-            <a href="/atividades/{{ atividade.id }}/editar/">✏️ Editar</a>
-            <a href="{% url 'editar_horarios' atividade.id %}">Editar horários</a> |
-            <a href="{% url 'ativar_rotina' atividade.id %}">Ativar</a> |
-            <a href="{% url 'excluir_rotina' atividade.id %}">Excluir</a>
-        </li>
-    {% endfor %}
-</ul>
+        <a href="/atividades/nova/" class="btn btn-primary mb-3"> Criar nova atividade</a>
 
-<a href="{% url 'inicio' %}">
-    <button type="button">Voltar</button>
-</a>
+        <ul class="list-group">
+            {% for atividade in atividades %}
+                <li class="list-group-item mb-2 p-3">
+                    <strong>{{ atividade.titulo }}</strong> - {{ atividade.descricao }}<br>
+                    Progresso: {{ atividade.progresso }}%<br>
 
+                    {% if atividade.horario_inicio %}
+                        Início: {{ atividade.horario_inicio|time:"H:i" }}
+                    {% else %}
+                        Início: -
+                    {% endif %}
+
+                    {% if atividade.horario_fim %}
+                        | Fim: {{ atividade.horario_fim|time:"H:i" }}
+                    {% else %}
+                        | Fim: -
+                    {% endif %}
+
+                    <div class="mt-2 d-flex gap-2 flex-wrap">
+                        <a href="/atividades/{{ atividade.id }}/editar/" class="btn btn-primary btn-sm">Editar</a>
+                        <a href="{% url 'editar_horarios' atividade.id %}" class="btn btn-info btn-sm">Editar horários</a>
+                        <a href="{% url 'ativar_rotina' atividade.id %}" class="btn btn-success btn-sm">Ativar</a>
+                        <a href="{% url 'excluir_rotina' atividade.id %}" class="btn btn-danger btn-sm">Excluir</a>
+                    </div>
+                </li>
+            {% empty %}
+                <li class="list-group-item">Nenhuma atividade encontrada.</li>
+            {% endfor %}
+        </ul>
+
+        <a href="{% url 'inicio' %}" class="btn btn-secondary mt-3">🔙 Voltar</a>
+    </div>
+</div>
+{% endblock %}
