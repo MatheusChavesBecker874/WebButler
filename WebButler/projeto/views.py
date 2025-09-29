@@ -144,11 +144,3 @@ def excluir_rotina(request, atividade_id):
     atividade.delete()
     return redirect("lista_atividades")
 
-
-def minha_view(request):
-    if request.method == "POST":
-        return HttpResponse("Form enviado com sucesso")
-    elif request.method == "GET":
-        return HttpResponse("Página carregada")
-    else:
-        return HttpResponseNotAllowed(["GET", "POST"])
