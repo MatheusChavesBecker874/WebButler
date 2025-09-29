@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-jj(4h5_-skbsqtz1t^zuj&2cn_&h-m$@5^(#5265jsbk+a#*qv
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['WebButler.com', 'localhost']
 
 
 # Application definition
