@@ -12,6 +12,8 @@ Figma: Historia 2: https://www.figma.com/design/wwCUGoXPgeHjb9XLv7MTzW/Sem-t%C3%
 
 link do deployment: https://webbutler.onrender.com/
 
+link para o vídeo no youtube: https://youtu.be/UgH9-zxMNWQ
+
 Screamcast do deployment:
 
 Programação em Par: devido ao fato do projeto ter sido realizado por apenas 2 pessoas foi inviavel realizar a programação em par
