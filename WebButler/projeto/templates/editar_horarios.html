@@ -1,25 +1,27 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Editar Horários</title>
-</head>
-<body>
-    <h1>Editar horários da atividade: {{ atividade.titulo }}</h1>
+{% extends 'base.html' %}
 
-    <form method="post">
-        {% csrf_token %}
+{% block title %}Editar Horários{% endblock %}
 
-        <label for="horario_inicio">Horário de Início:</label>
-        <input type="time" name="horario_inicio" value="{{ atividade.horario_inicio|default:'' }}"><br><br>
+{% block content %}
+<div class="container mt-5">
+    <div class="card p-4 shadow-sm">
+        <h2 class="mb-3"> Editar Horários</h2>
+        <p class="mb-4">Editar horários da atividade: <strong>{{ atividade.titulo }}</strong></p>
 
-        <label for="horario_fim">Horário de Fim:</label>
-        <input type="time" name="horario_fim" value="{{ atividade.horario_fim|default:'' }}"><br><br>
+        <form method="post">
+            {% csrf_token %}
 
-        <button type="submit">Salvar</button>
-    </form>
+            <label for="horario_inicio">Horário de Início:</label>
+            <input type="time" id="horario_inicio" name="horario_inicio" value="{{ atividade.horario_inicio|default:'' }}">
 
-    <br>
-    <a href="{% url 'lista_atividades' %}">⬅ Voltar para a lista</a>
-</body>
-</html>
+            <label for="horario_fim">Horário de Fim:</label>
+            <input type="time" id="horario_fim" name="horario_fim" value="{{ atividade.horario_fim|default:'' }}">
+
+            <div class="d-flex gap-2 mt-3">
+                <button type="submit" class="btn btn-primary"> Salvar</button>
+                <a href="{% url 'lista_atividades' %}" class="btn btn-secondary">⬅ Voltar para a lista</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
