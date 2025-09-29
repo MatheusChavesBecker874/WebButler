@@ -1,20 +1,24 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Nova Turma</title>
-</head>
-<body>
-    <h1>Cadastro de Turma</h1>
+{% extends 'base.html' %}
 
-    <form method="post">
-        {% csrf_token %}
-        <label>Nome:</label>
-        <input type="text" name="nome" required><br><br>
+{% block title %}Nova Turma{% endblock %}
 
-        <button type="submit">Salvar</button>
-    </form>
+{% block content %}
+<div class="container mt-5">
+    <div class="card p-4 shadow-sm">
+        <h2 class="mb-3">🏫 Cadastro de Turma</h2>
+        <p class="mb-4">Preencha o nome da turma e clique em salvar.</p>
 
-    <p><a href="{% url 'lista_turmas' %}">Voltar para lista de turmas</a></p>
-</body>
-</html>
+        <form method="post">
+            {% csrf_token %}
+
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required>
+
+            <div class="d-flex gap-2 mt-3">
+                <button type="submit" class="btn btn-primary">💾 Salvar</button>
+                <a href="{% url 'lista_turmas' %}" class="btn btn-secondary">🔙 Voltar para lista de turmas</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
