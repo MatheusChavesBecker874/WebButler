@@ -14,7 +14,7 @@ link do deployment: https://webbutler.onrender.com/
 
 link para o vídeo no youtube: https://youtu.be/UgH9-zxMNWQ
 
-Screamcast do deployment:
+Screamcast do deployment: https://youtu.be/UgH9-zxMNWQ
 
 Programação em Par: devido ao fato do projeto ter sido realizado por apenas 2 pessoas foi inviavel realizar a programação em par
 
