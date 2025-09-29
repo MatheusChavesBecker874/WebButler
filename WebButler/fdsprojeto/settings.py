@@ -148,6 +148,9 @@ else:
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
+ALLOWED_HOSTS = ['fdsprojeto.herokuapp.com']
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_URL = '/static/'
 
 
 
