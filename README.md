@@ -11,3 +11,5 @@ Figma: Historia 1: https://www.figma.com/design/AHKBhx9wZhoBsei5lzp05a/Sem-t%C3%
 Figma: Historia 2: https://www.figma.com/design/wwCUGoXPgeHjb9XLv7MTzW/Sem-t%C3%ADtulo?node-id=4-26&t=QW4bnxsLgp4Gapeu-1
 
 link do deployment: https://webbutler.onrender.com/
+
+Programação em Par: devido ao fato do projeto ter sido realizado por apenas 2 pessoas foi inviavel realizar a programação em par
