@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Turma2, Aluno2, Atividade2
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
 
 # ---------- Página inicial ----------
 def inicio(request):
@@ -103,7 +106,7 @@ def criar_turma(request):
         if nome:  
             Turma2.objects.create(nome=nome)
             return redirect("lista_turmas")
-    return render(request, "criar_turma.html")
+    return render(request, "nova")
 
 def lista_turmas(request):
     turmas = Turma2.objects.all()
@@ -144,3 +147,21 @@ def excluir_rotina(request, atividade_id):
     atividade.delete()
     return redirect("lista_atividades")
 
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('inicio')
+        else:
+            messages.error(request, 'Usuário ou senha incorretos.')
+
+    return render(request, 'login.html')
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
