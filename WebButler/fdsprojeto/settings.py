@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Segurança
 SECRET_KEY = os.environ.get("SECRET_KEY", "django-insecure-jj(4h5_-skbsqtz1t^zuj&2cn_&h-m$@5^(#5265jsbk+a#*qv")
-DEBUG = os.environ.get("DEBUG", "False") == "True"
+DEBUG = True
 ALLOWED_HOSTS = ["webbutler.onrender.com", "localhost", "127.0.0.1"]  # depois troque pelo domínio do Render (ex: seuapp.onrender.com)
 
 # Aplicativos instalados
