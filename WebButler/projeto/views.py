@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Turma2, Aluno2, Atividade2
+from .models import Turma2, Aluno2, Atividade2, Rotina, Aula
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from .forms import RotinaForm, AulaForm
 
 # ---------- Página inicial ----------
 def inicio(request):
@@ -147,6 +148,8 @@ def excluir_rotina(request, atividade_id):
     atividade.delete()
     return redirect("lista_atividades")
 
+# -------- Login --------
+
 def login_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -165,3 +168,22 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
+
+# ------- Rotinas ---------
+
+def criar_rotina(request):
+    if request.method == "POST":
+        form = RotinaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Rotina criada com sucesso!")
+            return redirect("listar_rotinas")
+        else:
+            messages.error(request, "Erro ao criar rotina")
+    else:
+        form = RotinaForm()
+    return render(request, "nova_rotina.html", {"form": form})
+
+def listar_rotinas(request):
+    rotinas = Rotina.objects.all()
+    return render(request, "listar_rotinas.html", {"rotinas": rotinas})

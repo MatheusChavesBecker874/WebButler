@@ -3,6 +3,8 @@ __pycache__/
 *.py[cod]
 *.egg-info/
 *.log
+*.pyc
+db.sqlite3
 
 # Django
 db.sqlite3
