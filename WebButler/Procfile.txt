@@ -1,1 +1,1 @@
-web: gunicorn fdsprojeto.wsgi:application
+web: cd WebButler/WebButler && gunicorn fdsprojeto.wsgi:application
