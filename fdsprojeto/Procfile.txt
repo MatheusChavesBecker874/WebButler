@@ -1,2 +1,2 @@
 release: python manage.py migrate && python create_superuser.py
-web: gunicorn fdsprojeto.wsgi
+web: gunicorn fdsprojeto.wsgi:application

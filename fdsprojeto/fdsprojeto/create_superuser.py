@@ -1,22 +1,13 @@
 from django.contrib.auth import get_user_model
 from django.db.utils import OperationalError
-import django
-import os
-
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "fdsprojeto.settings")
-django.setup()
 
 User = get_user_model()
 
 try:
     if not User.objects.filter(username="admin").exists():
-        User.objects.create_superuser(
-            username="professor",
-            email="professor@gmail.com",
-            password="professor123"
-        )
-        print("✅ Superusuário criado com sucesso!")
+        User.objects.create_superuser("admin", "admin@example.com", "admin123")
+        print("✅ Superusuário 'admin' criado com sucesso!")
     else:
-        print("ℹ️ O superusuário já existe, nada foi feito.")
+        print("ℹ️ Superusuário 'admin' já existe.")
 except OperationalError:
-    print("⚠️ Banco de dados ainda não está pronto. Rode as migrações primeiro.")
+    print("⚠️ O banco de dados ainda não está pronto. Ignorando criação do superusuário.")
