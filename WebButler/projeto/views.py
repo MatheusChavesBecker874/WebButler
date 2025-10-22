@@ -7,10 +7,12 @@ from django.contrib.auth import authenticate, login, logout
 from .forms import RotinaForm, AulaForm
 
 # ---------- Página inicial ----------
+@login_required(login_url='login')
 def inicio(request):
     return render(request, "inicio.html")
 
 # ---------- Visualizar Alunos ----------
+@login_required(login_url='login')
 def lista_alunos(request):
     alunos = Aluno2.objects.all()
     return render(request, "alunos/lista.html", {"alunos": alunos})
@@ -39,6 +41,7 @@ def nova_turma(request):
 
 
 # ---------- Visualizar/Criar Atividades ----------
+@login_required(login_url='login')
 def lista_atividades(request):
     atividades = Atividade2.objects.all()
     return render(request, "atividades/lista.html", {"atividades": atividades})
@@ -109,11 +112,12 @@ def criar_turma(request):
             return redirect("lista_turmas")
     return render(request, "nova")
 
+@login_required(login_url='login')
 def lista_turmas(request):
     turmas = Turma2.objects.all()
     return render(request, "lista_turmas.html", {"turmas": turmas})
 
-
+@login_required(login_url='login')
 def lista_alunos(request):
     alunos = Aluno2.objects.all()
     return render(request, "lista_alunos.html", {"alunos": alunos})
@@ -171,6 +175,7 @@ def logout_view(request):
 
 # ------- Rotinas ---------
 
+@login_required(login_url='login')
 def criar_rotina(request):
     if request.method == "POST":
         form = RotinaForm(request.POST)
