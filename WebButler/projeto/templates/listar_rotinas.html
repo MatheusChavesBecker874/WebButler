@@ -9,11 +9,14 @@
   <div class="container">
     <h1 class="mb-4">Rotinas de Aulas</h1>
 
-    <a href="{% url 'criar_rotina' %}" class="btn btn-primary mb-3">+ Nova Rotina</a>
+    <div class="d-flex justify-content-between mb-3">
+      <a href="{% url 'criar_rotina' %}" class="btn btn-primary">+ Nova Rotina</a>
+      <a href="{% url 'inicio' %}" class="btn btn-secondary">⮌ Voltar ao Início</a>
+    </div>
 
     {% if rotinas %}
-      <table class="table table-striped">
-        <thead>
+      <table class="table table-striped shadow-sm">
+        <thead class="table-dark">
           <tr>
             <th>Nome</th>
             <th>Data de Criação</th>
