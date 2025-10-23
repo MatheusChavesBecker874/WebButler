@@ -1,2 +1,1 @@
-web: bash -c "cd WebButler && gunicorn fdsprojeto.wsgi:application"
-release: bash -c "cd WebButler && python manage.py makemigrations --noinput && python manage.py migrate --noinput && python WebButler/create_superuser.py"
+web: bash -c "cd WebButler && python manage.py makemigrations --noinput && python manage.py migrate --noinput && python WebButler/create_superuser.py && gunicorn fdsprojeto.wsgi:application"
