@@ -1,0 +1,19 @@
+<h2>Editar Rotina</h2>
+
+<form method="POST">
+  {% csrf_token %}
+  <label>Nome:</label>
+  <input type="text" name="nome" value="{{ rotina.nome }}" class="form-control mb-2">
+
+  <label>Dias:</label>
+  <input type="text" name="dias" value="{{ rotina.dias }}" class="form-control mb-2">
+
+  <label>Horário de Início:</label>
+  <input type="time" name="horario_inicio" value="{{ rotina.horario_inicio }}" class="form-control mb-2">
+
+  <label>Horário de Fim:</label>
+  <input type="time" name="horario_fim" value="{{ rotina.horario_fim }}" class="form-control mb-2">
+
+  <button type="submit" class="btn btn-success">Salvar</button>
+  <a href="{% url 'listar_rotinas' %}" class="btn btn-secondary">Cancelar</a>
+</form>

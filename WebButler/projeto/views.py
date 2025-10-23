@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .forms import RotinaForm, AulaForm
+from django.db import connection
+from django.core.management import call_command
 
 
 # ---------- Página inicial ----------
@@ -209,3 +211,20 @@ def criar_rotina(request):
 def listar_rotinas(request):
     rotinas = Rotina.objects.all()
     return render(request, "listar_rotinas.html", {"rotinas": rotinas})
+
+def editar_rotina(request, id):
+    rotina = get_object_or_404(Rotina, id=id)
+    if request.method == 'POST':
+        rotina.nome = request.POST.get('nome')
+        rotina.dias = request.POST.get('dias')
+        rotina.horario_inicio = request.POST.get('horario_inicio')
+        rotina.horario_fim = request.POST.get('horario_fim')
+        rotina.save()
+        return redirect('listar_rotinas')
+    return render(request, 'editar_rotina.html', {'rotina': rotina})
+
+def resetar_migracoes(request):
+    with connection.cursor() as cursor:
+        cursor.execute("DELETE FROM django_migrations WHERE app='projeto';")
+    call_command('migrate', 'projeto', fake=False, interactive=False)
+    return HttpResponse("Migrações do app 'projeto' resetadas e aplicadas novamente!")
