@@ -27,6 +27,9 @@
             <tr>
               <td>{{ r.nome }}</td>
               <td>{{ r.criada_em|date:"d/m/Y H:i" }}</td>
+              <td>
+                <a href="{% url 'editar_rotina' rotina.id %}" class="btn btn-warning btn-sm">Editar</a>
+              </td>
             </tr>
           {% endfor %}
         </tbody>

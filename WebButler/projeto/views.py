@@ -209,3 +209,14 @@ def criar_rotina(request):
 def listar_rotinas(request):
     rotinas = Rotina.objects.all()
     return render(request, "listar_rotinas.html", {"rotinas": rotinas})
+
+def editar_rotina(request, id):
+    rotina = get_object_or_404(Rotina, id=id)
+    if request.method == 'POST':
+        rotina.nome = request.POST.get('nome')
+        rotina.dias = request.POST.get('dias')
+        rotina.horario_inicio = request.POST.get('horario_inicio')
+        rotina.horario_fim = request.POST.get('horario_fim')
+        rotina.save()
+        return redirect('listar_rotinas')
+    return render(request, 'editar_rotina.html', {'rotina': rotina})

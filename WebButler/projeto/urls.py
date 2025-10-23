@@ -33,4 +33,5 @@ urlpatterns = [
     # Rotinas
     path("rotinas/", views.listar_rotinas, name="listar_rotinas"),
     path("rotinas/nova/", views.criar_rotina, name="criar_rotina"),
+    path('rotinas/editar/<int:id>/', views.editar_rotina, name='editar_rotina'),
 ]
