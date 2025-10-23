@@ -1,0 +1,44 @@
+name: CI/CD Pipeline
+
+# Acionar a pipeline em push ou pull request para a branch 'main'
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Definindo o sistema operacional para o job
+
+    steps:
+      # Passo 1: Verificar o código
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Passo 2: Configurar o Python
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'  # Alterar para a versão que você utiliza no projeto
+
+      # Passo 3: Instalar dependências
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt  # Instala as dependências do seu projeto
+
+      # Passo 4: Rodar os testes automatizados
+      - name: Run tests
+        run: |
+          python -m unittest discover -s tests  # Rodar os testes com unittest (ou pytest, se for o caso)
+
+      # Passo 5: Deploy para Render (caso desejado)
+      - name: Deploy to Render
+        if: success()  # Só faz o deploy se os testes forem bem-sucedidos
+        run: |
+          git remote add render https://webbutler.onrender.com
+          git push render main
+
