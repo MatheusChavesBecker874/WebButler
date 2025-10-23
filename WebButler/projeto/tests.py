@@ -3,6 +3,9 @@ import pytest
 from django.core.exceptions import ValidationError
 from datetime import time
 from .models import Rotina, Aula
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+import time
 
 @pytest.mark.django_db
 def test_c1_cadastrar_rotina_valida():
