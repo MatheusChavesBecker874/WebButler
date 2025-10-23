@@ -58,7 +58,7 @@ class Atividade2(models.Model):
 # Rotinas ------------
 
 class Rotina(models.Model):
-    nome = models.CharField(max_length=100)
+    nome = models.CharField(max_length=120)
     dias = models.CharField(max_length=100, default='')
     descricao = models.TextField(blank=True, null=True)
     horario_inicio = models.TimeField(default="00:00")
