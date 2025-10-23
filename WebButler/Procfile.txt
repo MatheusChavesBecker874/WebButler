@@ -1,1 +1,1 @@
-web: bash -c "cd WebButler && python manage.py migrate --fake projeto zero && python manage.py migrate --fake-initial && gunicorn fdsprojeto.wsgi:application"
+web: bash -c "cd WebButler && python manage.py migrate --fake-initial --noinput && gunicorn fdsprojeto.wsgi:application"
