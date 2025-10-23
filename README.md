@@ -14,6 +14,8 @@ link do deployment: https://webbutler.onrender.com/
 
 link para o vídeo no youtube (Screamcast): https://youtu.be/h9BqOtRP3Nk
 
+link para o video de testes automatizados no youtube (Screencast): https://youtu.be/zrH-moXK8fk
+
 Programação em Par: devido ao fato do projeto ter sido realizado por apenas 2 pessoas foi inviavel realizar a programação em par, majoritariamente devido a dificuldade de alinhar os horarios sem comprometer o ritimo do projeto
 
 Print quadro de Sprints2: <img width="1345" height="674" alt="Screenshot_Sprints2" src="https://github.com/user-attachments/assets/e705c6a2-2a31-448f-b5ad-98ad74464285" />
