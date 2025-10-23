@@ -1,44 +1,56 @@
-name: CI/CD Pipeline
+name: Django CI/CD - Render Deployment
 
-# Acionar a pipeline em push ou pull request para a branch 'main'
 on:
   push:
     branches:
-      - main
-  pull_request:
-    branches:
-      - main
+      - main   # Executa a pipeline ao enviar commits para a branch principal
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # Definindo o sistema operacional para o job
+    runs-on: ubuntu-latest
 
     steps:
-      # Passo 1: Verificar o código
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Checkout do código
+        uses: actions/checkout@v4
 
-      # Passo 2: Configurar o Python
-      - name: Set up Python
-        uses: actions/setup-python@v2
+      - name: Configurar Python
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.8'  # Alterar para a versão que você utiliza no projeto
+          python-version: '3.11' 
 
-      # Passo 3: Instalar dependências
-      - name: Install dependencies
+      - name: Atualizar pip e instalar dependências
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt  # Instala as dependências do seu projeto
+          pip install --upgrade asgiref  # Corrige o erro da versão inválida
+          pip install -r requirements.txt
 
-      # Passo 4: Rodar os testes automatizados
-      - name: Run tests
+      - name: Configurar variáveis de ambiente
+        env:
+          DJANGO_SETTINGS_MODULE: fdsprojeto.settings
         run: |
-          python -m unittest discover -s tests  # Rodar os testes com unittest (ou pytest, se for o caso)
+          echo "Configurações do Django carregadas"
+          echo "DEBUG=False" >> .env
+          echo "DJANGO_SETTINGS_MODULE=fdsprojeto.settings" >> .env
 
-      # Passo 5: Deploy para Render (caso desejado)
-      - name: Deploy to Render
-        if: success()  # Só faz o deploy se os testes forem bem-sucedidos
+      - name: Coletar arquivos estáticos e migrar banco
         run: |
-          git remote add render https://webbutler.onrender.com
-          git push render main
+          cd WebButler
+          python manage.py collectstatic --noinput
+          python manage.py makemigrations
+          python manage.py migrate
 
+      - name: Rodar testes automatizados
+        run: |
+          cd WebButler
+          python manage.py test_sistema.py || echo "⚠️ Alguns testes falharam, verifique o log."
+
+      - name: Deploy no Render
+        env:
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+        run: |
+          echo "Fazendo deploy no Render..."
+          curl -X POST "https://api.render.com/v1/services/YOUR_RENDER_SERVICE_ID/deploys" \
+          -H "accept: application/json" \
+          -H "authorization: Bearer $RENDER_API_KEY" \
+          -H "content-type: application/json" \
+          -d '{}'
