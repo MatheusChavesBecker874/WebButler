@@ -9,14 +9,11 @@
   <div class="container">
     <h1 class="mb-4">Rotinas de Aulas</h1>
 
-    <div class="d-flex justify-content-between mb-3">
-      <a href="{% url 'criar_rotina' %}" class="btn btn-primary">+ Nova Rotina</a>
-      <a href="{% url 'inicio' %}" class="btn btn-secondary">⮌ Voltar ao Início</a>
-    </div>
+    <a href="{% url 'criar_rotina' %}" class="btn btn-primary mb-3">+ Nova Rotina</a>
 
     {% if rotinas %}
-      <table class="table table-striped shadow-sm">
-        <thead class="table-dark">
+      <table class="table table-striped">
+        <thead>
           <tr>
             <th>Nome</th>
             <th>Data de Criação</th>
@@ -27,9 +24,6 @@
             <tr>
               <td>{{ r.nome }}</td>
               <td>{{ r.criada_em|date:"d/m/Y H:i" }}</td>
-              <td>
-                <a href="{% url 'editar_rotina' rotina.id %}" class="btn btn-warning btn-sm">Editar</a>
-              </td>
             </tr>
           {% endfor %}
         </tbody>

@@ -55,9 +55,7 @@ WSGI_APPLICATION = 'fdsprojeto.wsgi.application'
 # Banco de dados
 DATABASES = {
     "default": dj_database_url.config(
-        default=os.environ.get('DATABASE_URL'),
-        conn_max_age=600,
-        #default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}"
+        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}"
     )
 }
 
@@ -81,7 +79,3 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # PK default
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'inicio'
-LOGOUT_REDIRECT_URL = 'login'

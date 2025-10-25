@@ -5,24 +5,16 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .forms import RotinaForm, AulaForm
-from django.db import connection
-from django.core.management import call_command
-
 
 # ---------- Página inicial ----------
-@login_required(login_url='login')
 def inicio(request):
     return render(request, "inicio.html")
 
-
-# ---------- Alunos ----------
-@login_required(login_url='login')
+# ---------- Visualizar Alunos ----------
 def lista_alunos(request):
     alunos = Aluno2.objects.all()
-    return render(request, "lista_alunos.html", {"alunos": alunos})
+    return render(request, "alunos/lista.html", {"alunos": alunos})
 
-
-@login_required(login_url='login')
 def novo_aluno(request):
     if request.method == "POST":
         nome = request.POST.get("nome")
@@ -30,63 +22,27 @@ def novo_aluno(request):
 
         if nome and email:
             Aluno2.objects.create(nome=nome, email=email)
-            messages.success(request, "Aluno criado com sucesso!")
             return redirect("lista_alunos")
 
     return render(request, "alunos/novo.html")
 
-
-@login_required(login_url='login')
-def criar_aluno(request):
-    if request.method == "POST":
-        nome = request.POST.get("nome")
-        turma_id = request.POST.get("turma")
-        if nome and turma_id:
-            turma = Turma2.objects.get(id=turma_id)
-            Aluno2.objects.create(nome=nome, turma=turma)
-            messages.success(request, "Aluno criado com sucesso!")
-            return redirect("lista_alunos")
-    turmas = Turma2.objects.all()
-    return render(request, "criar_aluno.html", {"turmas": turmas})
-
-
-# ---------- Turmas ----------
-@login_required(login_url='login')
-def lista_turmas(request):
-    turmas = Turma2.objects.all()
-    return render(request, "lista_turmas.html", {"turmas": turmas})
-
-
-@login_required(login_url='login')
+# ---------- Turma ----------
 def nova_turma(request):
     if request.method == "POST":
         nome = request.POST.get("nome")
+
         if nome:
             Turma2.objects.create(nome=nome)
-            messages.success(request, "Turma criada com sucesso!")
             return redirect("lista_turmas")
+
     return render(request, "turmas/nova.html")
 
 
-@login_required(login_url='login')
-def criar_turma(request):
-    if request.method == "POST":
-        nome = request.POST.get("nome")
-        if nome:
-            Turma2.objects.create(nome=nome)
-            messages.success(request, "Turma criada com sucesso!")
-            return redirect("lista_turmas")
-    return render(request, "turmas/nova.html")
-
-
-# ---------- Atividades ----------
-@login_required(login_url='login')
+# ---------- Visualizar/Criar Atividades ----------
 def lista_atividades(request):
     atividades = Atividade2.objects.all()
     return render(request, "atividades/lista.html", {"atividades": atividades})
 
-
-@login_required(login_url='login')
 def criar_atividade(request):
     if request.method == "POST":
         titulo = request.POST.get("titulo")
@@ -95,22 +51,24 @@ def criar_atividade(request):
         progresso = request.POST.get("progresso", 0)
 
         turma = Turma2.objects.get(id=turma_id)
+
         Atividade2.objects.create(
             titulo=titulo,
             descricao=descricao,
             turma=turma,
             progresso=progresso
         )
-        messages.success(request, "Atividade criada com sucesso!")
         return redirect("lista_atividades")
 
     turmas = Turma2.objects.all()
     return render(request, "criar_atividade.html", {"turmas": turmas})
 
 
-@login_required(login_url='login')
+
+# ---------- Editar Atividade ----------
 def editar_atividade(request, atividade_id):
     atividade = Atividade2.objects.get(id=atividade_id)
+
     if request.method == "POST":
         titulo = request.POST.get("titulo")
         descricao = request.POST.get("descricao")
@@ -127,16 +85,44 @@ def editar_atividade(request, atividade_id):
                 atividade.progresso = 0
 
             atividade.save()
-            messages.success(request, "Atividade atualizada com sucesso!")
             return redirect("lista_atividades")
 
     return render(request, "atividades/editar.html", {"atividade": atividade})
 
+# ---------- Criar ----------
+def criar_aluno(request):
+    if request.method == "POST":
+        nome = request.POST.get("nome")
+        turma_id = request.POST.get("turma")
+        if nome and turma_id:
+            turma = Turma2.objects.get(id=turma_id)
+            Aluno2.objects.create(nome=nome, turma=turma)
+            return redirect("lista_alunos")
+    turmas = Turma2.objects.all()
+    return render(request, "criar_aluno.html", {"turmas": turmas})
+
+def criar_turma(request):
+    if request.method == "POST":
+        nome = request.POST.get("nome")
+        if nome:  
+            Turma2.objects.create(nome=nome)
+            return redirect("lista_turmas")
+    return render(request, "nova")
+
+def lista_turmas(request):
+    turmas = Turma2.objects.all()
+    return render(request, "lista_turmas.html", {"turmas": turmas})
+
+
+def lista_alunos(request):
+    alunos = Aluno2.objects.all()
+    return render(request, "lista_alunos.html", {"alunos": alunos})
 
 # ---------- Horários ----------
-@login_required(login_url='login')
+
 def editar_horarios(request, atividade_id):
     atividade = get_object_or_404(Atividade2, id=atividade_id)
+
     if request.method == "POST":
         horario_inicio = request.POST.get("horario_inicio")
         horario_fim = request.POST.get("horario_fim")
@@ -147,30 +133,23 @@ def editar_horarios(request, atividade_id):
             atividade.horario_fim = horario_fim
 
         atividade.save()
-        messages.success(request, "Horários atualizados com sucesso!")
-        return redirect("lista_atividades")
 
+        return redirect("lista_atividades")
     return render(request, "editar_horarios.html", {"atividade": atividade})
 
-
-@login_required(login_url='login')
 def ativar_rotina(request, atividade_id):
     atividade = get_object_or_404(Atividade2, id=atividade_id)
     atividade.ativo = True
     atividade.save()
-    messages.success(request, "Rotina ativada!")
-    return redirect("lista_atividades")
+    return redirect('lista_atividades')
 
-
-@login_required(login_url='login')
 def excluir_rotina(request, atividade_id):
     atividade = get_object_or_404(Atividade2, id=atividade_id)
     atividade.delete()
-    messages.success(request, "Rotina excluída com sucesso!")
     return redirect("lista_atividades")
 
+# -------- Login --------
 
-# ---------- Login ----------
 def login_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -190,9 +169,8 @@ def logout_view(request):
     logout(request)
     return redirect('login')
 
+# ------- Rotinas ---------
 
-# ---------- Rotinas ----------
-@login_required(login_url='login')
 def criar_rotina(request):
     if request.method == "POST":
         form = RotinaForm(request.POST)
@@ -201,30 +179,11 @@ def criar_rotina(request):
             messages.success(request, "Rotina criada com sucesso!")
             return redirect("listar_rotinas")
         else:
-            messages.error(request, "Erro ao criar rotina.")
+            messages.error(request, "Erro ao criar rotina")
     else:
         form = RotinaForm()
     return render(request, "nova_rotina.html", {"form": form})
 
-
-@login_required(login_url='login')
 def listar_rotinas(request):
     rotinas = Rotina.objects.all()
     return render(request, "listar_rotinas.html", {"rotinas": rotinas})
-
-def editar_rotina(request, id):
-    rotina = get_object_or_404(Rotina, id=id)
-    if request.method == 'POST':
-        rotina.nome = request.POST.get('nome')
-        rotina.dias = request.POST.get('dias')
-        rotina.horario_inicio = request.POST.get('horario_inicio')
-        rotina.horario_fim = request.POST.get('horario_fim')
-        rotina.save()
-        return redirect('listar_rotinas')
-    return render(request, 'editar_rotina.html', {'rotina': rotina})
-
-def resetar_migracoes(request):
-    with connection.cursor() as cursor:
-        cursor.execute("DELETE FROM django_migrations WHERE app='projeto';")
-    call_command('migrate', 'projeto', fake=False, interactive=False)
-    return HttpResponse("Migrações do app 'projeto' resetadas e aplicadas novamente!")
