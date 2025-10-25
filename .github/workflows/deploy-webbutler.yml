@@ -33,12 +33,15 @@ jobs:
           cd WebButler
           python manage.py test || true
 
-      - name: Preparar build para deploy
+      - name: Preparar build para deploy (reset banco e migrar)
         run: |
           cd WebButler
-          python manage.py collectstatic --noinput
+          echo "🧹 Limpando banco SQLite anterior..."
+          rm -f db.sqlite3 || true
+          echo "🧱 Rodando migrações do zero..."
           python manage.py makemigrations --noinput
           python manage.py migrate --noinput
+          python manage.py collectstatic --noinput
           cd ..
           zip -r webbutler-release.zip ./*
 
