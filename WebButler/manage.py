@@ -16,20 +16,20 @@ def main():
         ) from exc
 
 
-    if os.environ.get("RENDER") == "true":  
-        import django
-        django.setup()
-        from django.contrib.auth import get_user_model
-        User = get_user_model()
-        if not User.objects.filter(username="admin").exists():
-            User.objects.create_superuser("admin", "admin@example.com", "admin123")
-            print("✅ Superusuário 'admin' criado automaticamente.")
-        else:
-            print("ℹ️ Superusuário 'admin' já existe.")
+#    if os.environ.get("RENDER") == "true":  
+ #       import django
+  #      django.setup()
+   #    from django.contrib.auth import get_user_model
+    #    User = get_user_model()
+    #    if not User.objects.filter(username="admin").exists():
+    #        User.objects.create_superuser("admin", "admin@example.com", "admin123")
+#            print("✅ Superusuário 'admin' criado automaticamente.")
+#        else:
+#            print("ℹ️ Superusuário 'admin' já existe.")
 
 
-    execute_from_command_line(sys.argv)
+#    execute_from_command_line(sys.argv)
 
 
-if __name__ == '__main__':
-    main()
+#if __name__ == '__main__':
+#    main()
