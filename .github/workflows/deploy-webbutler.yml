@@ -31,7 +31,7 @@ jobs:
       - name: Rodar testes do Django
         run: |
           cd WebButler
-          python manage.py test ||
+          python manage.py test
 
       - name: Preparar build para deploy
         run: |
