@@ -24,6 +24,7 @@ link para o video de testes automatizados no youtube (Screencast): https://youtu
 
 link para o video da pipeline da aplicação no youtube (Screencast): https://youtu.be/4E5UrBiRVgU
 
-print Issue Tracker:
+print Issue Tracker:<img width="1365" height="694" alt="Issue_Tracker" src="https://github.com/user-attachments/assets/4d0709dd-2d5f-46a8-9439-0dbf4df01278" />
+
 
 Print Jira atualizado (E3):<img width="1356" height="638" alt="JiraE3" src="https://github.com/user-attachments/assets/1f2a7940-d278-4b5d-9ffa-836b50266521" />
