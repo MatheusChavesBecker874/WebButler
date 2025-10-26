@@ -23,3 +23,7 @@ Entrega 3:
 link para o video de testes automatizados no youtube (Screencast): https://youtu.be/zrH-moXK8fk
 
 link para o video da pipeline da aplicação no youtube (Screencast): https://youtu.be/4E5UrBiRVgU
+
+print Issue Tracker:
+
+Print Jira atualizado (E3):<img width="1356" height="638" alt="JiraE3" src="https://github.com/user-attachments/assets/1f2a7940-d278-4b5d-9ffa-836b50266521" />
