@@ -5,9 +5,9 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Segurança
-SECRET_KEY = os.environ.get("SECRET_KEY", "django-insecure-jj(4h5_-skbsqtz1t^zuj&2cn_&h-m$@5^(#5265jsbk+a#*qv")
-DEBUG = os.environ.get("DEBUG", "True") == "True"
-ALLOWED_HOSTS = ["webbutler.onrender.com", "localhost", "127.0.0.1"]  # depois troque pelo domínio do Render (ex: seuapp.onrender.com)
+SECRET_KEY = os.environ.get("SECRET_KEY", "change-me")
+DEBUG = os.environ.get("DEBUG", "False") == "True"
+ALLOWED_HOSTS = ["webbutler.onrender.com", "localhost", "127.0.0.1"]
 
 # Aplicativos instalados
 INSTALLED_APPS = [
@@ -17,8 +17,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'fdsprojeto',
-    'projeto',
+    'projeto.apps.ProjetoConfig',
 ]
 
 # Middlewares
