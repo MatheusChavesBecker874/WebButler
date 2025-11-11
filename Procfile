@@ -1,0 +1,1 @@
+web: gunicorn --chdir WebButler/WebButler fdsprojeto.wsgi:application
