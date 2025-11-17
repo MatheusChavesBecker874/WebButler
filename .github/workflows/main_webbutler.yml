@@ -43,8 +43,9 @@ jobs:
 
       - name: Zip artifact for deployment
         run: |
-          zip -r release.zip WebButler/*
-          mv release.zip .
+          cd WebButler
+          zip -r ../release.zip .
+          cd ..
 
       # 🚫 Opting Out of Oryx Build
       # If you prefer to disable the Oryx build process during deployment, follow these steps:
