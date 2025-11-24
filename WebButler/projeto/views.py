@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Turma2, Aluno2, Atividade2, Rotina, Aula
+from .models import Turma2, Aluno2, Atividade2, Rotina, Aula, Compromisso
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from .forms import RotinaForm, AulaForm
+from .forms import RotinaForm, AulaForm, CompromissoForm
+from django.utils import timezone
+from django.core.exceptions import ValidationError
+from datetime import datetime, timedelta
 
 # ---------- Página inicial ----------
 def inicio(request):
@@ -187,3 +190,87 @@ def criar_rotina(request):
 def listar_rotinas(request):
     rotinas = Rotina.objects.all()
     return render(request, "listar_rotinas.html", {"rotinas": rotinas})
+
+@login_required
+def lista_compromissos(request):
+    compromissos = Compromisso.objects.order_by("data_inicio")
+    return render(request, "compromissos/lista.html", {"compromissos": compromissos})
+
+
+@login_required
+def novo_compromisso(request):
+    if request.method == "POST":
+        form = CompromissoForm(request.POST)
+
+        if form.is_valid():
+            compromisso = form.save(commit=False)
+
+            try:
+                compromisso.clean()  # C2 + C3
+                compromisso.save()
+
+                messages.success(request, "Compromisso criado com sucesso!")
+                return redirect("lista_compromissos")
+
+            except ValidationError as e:
+                erro = list(e.messages)[0]
+
+                # Ativa popup de sobrescrever se der conflito
+                if "Deseja sobrescrever" in erro:
+                    request.session["novo_compromisso"] = {
+                        "titulo": form.cleaned_data["titulo"],
+                        "data_inicio": form.cleaned_data["data_inicio"].isoformat(),
+                        "data_fim": form.cleaned_data["data_fim"].isoformat(),
+                        "lembrete": form.cleaned_data["lembrete_minutos"],
+                    }
+                    request.session["confirmar_sobrescrita"] = True
+
+                messages.error(request, erro)
+
+    else:
+        form = CompromissoForm()
+
+    return render(request, "compromissos/novo.html", {"form": form})
+
+@login_required
+def sobrescrever_compromisso(request):
+    dados = request.session.get("novo_compromisso")
+
+    if not dados:
+        messages.error(request, "Nenhum compromisso para sobrescrever.")
+        return redirect("novo_compromisso")
+
+    data_inicio = datetime.fromisoformat(dados["data_inicio"])
+    data_fim = datetime.fromisoformat(dados["data_fim"])
+
+    # Apaga os conflitos
+    Compromisso.objects.filter(
+        data_inicio__lt=data_fim,
+        data_fim__gt=data_inicio
+    ).delete()
+
+    # Cria o novo
+    Compromisso.objects.create(
+        titulo=dados["titulo"],
+        data_inicio=data_inicio,
+        data_fim=data_fim,
+        lembrete_minutos=dados["lembrete"]
+    )
+
+    # Limpa sessão
+    del request.session["novo_compromisso"]
+    del request.session["confirmar_sobrescrita"]
+
+    messages.success(request, "Compromisso substituído com sucesso!")
+    return redirect("lista_compromissos")
+
+@login_required
+def remover_compromisso(request, id):
+    compromisso = get_object_or_404(Compromisso, id=id)
+
+    if request.method == "POST":
+        compromisso.delete()
+        messages.success(request, "Compromisso removido com sucesso!")
+        return redirect("lista_compromissos")
+
+    return render(request, "compromissos/confirmar_remocao.html", {"compromisso": compromisso})

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Rotina, Aula
+from .models import Rotina, Aula, Compromisso
 
 class RotinaForm(forms.ModelForm):
     class Meta:
@@ -33,3 +33,27 @@ class AulaForm(forms.ModelForm):
         cleaned_data = super().clean()
         # A lógica de conflito já está no `clean()` do model Aula
         return cleaned_data
+    
+class CompromissoForm(forms.ModelForm):
+    class Meta:
+        model = Compromisso
+        fields = ["titulo", "data_inicio", "data_fim", "lembrete_minutos"]
+        widgets = {
+            "titulo": forms.TextInput(attrs={
+                "class": "form-control",
+                "placeholder": "Ex: Reunião TCC"
+            }),
+            "data_inicio": forms.DateTimeInput(attrs={
+                "type": "datetime-local",
+                "class": "form-control"
+            }),
+            "data_fim": forms.DateTimeInput(attrs={
+                "type": "datetime-local",
+                "class": "form-control"
+            }),
+            "lembrete_minutos": forms.NumberInput(attrs={
+                "class": "form-control",
+                "min": 1,
+                "placeholder": "30"
+            }),
+        }

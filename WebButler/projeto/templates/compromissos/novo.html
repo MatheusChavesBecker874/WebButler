@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Novo Compromisso</title>
+</head>
+<body>
+
+    <h1>Novo Compromisso</h1>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color: red;">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit">Salvar compromisso</button>
+    </form>
+
+    {% if request.session.confirmar_sobrescrita %}
+    <script>
+        if (confirm("Já existe um compromisso nesse horário. Deseja sobrescrever?")) {
+            window.location.href = "{% url 'sobrescrever_compromisso' %}";
+        } else {
+            alert("Criação cancelada.");
+        }
+    </script>
+    {% endif %}
+
+</body>
+</html>

@@ -25,25 +25,25 @@ ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(" ")
 # Banco de Dados
 # -----------------------------------------------------------
 # Banco tradicional para mexer no código localmente
-'''
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-'''
+
 
 # Banco para produção na Azure
 # LEMBRAR DE NÃO SUBIR o db.sqlite3 do projeto no GitHub
-
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': '/home/database/db.sqlite3',
     }
 }
-
+'''
 # -----------------------------------------------------------
 
 # Application definition

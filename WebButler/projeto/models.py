@@ -93,3 +93,38 @@ class Aula(models.Model):
 
     def __str__(self):
         return f"{self.disciplina} - {self.dia} ({self.inicio} às {self.fim})"
+
+# Compromissos -------------
+class Compromisso(models.Model):
+    titulo = models.CharField(max_length=200)
+
+    data_inicio = models.DateTimeField()
+    data_fim = models.DateTimeField()
+
+    lembrete_minutos = models.IntegerField(default=30)
+
+    criado_em = models.DateTimeField(auto_now_add=True)
+
+    def clean(self):
+        agora = timezone.now()
+
+        # impedir data no passado
+        if self.data_inicio < agora:
+            raise ValidationError("Data/hora deve ser futura")
+
+        if self.data_inicio >= self.data_fim:
+            raise ValidationError("Data/hora de início deve ser antes da data/hora de fim")
+
+        # verificar conflito de horário
+        conflitos = self.__class__.objects.filter(
+            data_inicio__lt=self.data_fim,
+            data_fim__gt=self.data_inicio
+        ).exclude(id=self.id)
+
+        if conflitos.exists():
+            raise ValidationError(
+                "Já existe um compromisso nesse horário. Deseja sobrescrever?"
+            )
+
+    def __str__(self):
+        return f"{self.titulo} ({self.data_inicio} - {self.data_fim})"

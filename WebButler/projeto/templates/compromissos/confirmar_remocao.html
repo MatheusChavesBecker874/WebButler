@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirmar remoção</title>
+</head>
+<body>
+
+<h2>Tem certeza que deseja remover o compromisso?</h2>
+
+<p><strong>{{ compromisso.titulo }}</strong></p>
+<p>{{ compromisso.data_inicio }} até {{ compromisso.data_fim }}</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Sim, remover</button>
+    <a href="{% url 'lista_compromissos' %}">
+        <button type="button">Cancelar</button>
+    </a>
+</form>
+
+</body>
+</html>

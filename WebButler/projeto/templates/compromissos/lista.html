@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Meus Compromissos</title>
+</head>
+<body>
+
+    <h1>Meus Compromissos</h1>
+
+    <a href="{% url 'novo_compromisso' %}">+ Novo compromisso</a>
+
+    <ul>
+        {% for c in compromissos %}
+            <li>
+                <strong>{{ c.titulo }}</strong><br>
+                De {{ c.data_inicio }} até {{ c.data_fim }}<br>
+                Lembrete: {{ c.lembrete_minutos }} min antes
+            </li>
+        {% empty %}
+            <li>Nenhum compromisso cadastrado</li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
