@@ -40,6 +40,6 @@ link para o video da pipeline da aplicação no youtube (Screencast): https://yo
 
 Print das duas histórias implementadas: <img width="2029" height="58" alt="image" src="https://github.com/user-attachments/assets/2b4a1043-93c4-4187-984c-7d89aa69b10d" />
 
-# A programação em par continuou sem ser utilizada devido á pouca adequação dos integrantes com a metodologia, além de também ser uma equipe com apenas duas pessoas, o que tornou ainda mais difícil sua aplicação e aprendizado sem maiores complicações. Opitamos por não utilizá-la, visto que poderíamos conseguir nos adequar melhor sem ela e com nossa própria organização para o programa.
+Programação em par: A programação em par continuou sem ser utilizada devido á pouca adequação dos integrantes com a metodologia, além de também ser uma equipe com apenas duas pessoas, o que tornou ainda mais difícil sua aplicação e aprendizado sem maiores complicações. Opitamos por não utilizá-la, visto que poderíamos conseguir nos adequar melhor sem ela e com nossa própria organização para o programa.
 
 # Entrega 4:
