@@ -1,0 +1,22 @@
+<h2>Remover compromisso recorrente</h2>
+
+<p>
+    <strong>{{ compromisso.titulo }}</strong><br>
+    Ocorrência de {{ compromisso.data_inicio|date:"d/m/Y" }}
+</p>
+
+<form method="post">
+    {% csrf_token %}
+
+    <button name="acao" value="ocorrencia" class="btn btn-warning">
+        Remover apenas esta ocorrência
+    </button>
+
+    <button name="acao" value="todos" class="btn btn-danger">
+        Remover toda a recorrência
+    </button>
+
+    <a class="btn btn-secondary" href="{% url 'lista_compromissos' %}">
+        Cancelar
+    </a>
+</form>

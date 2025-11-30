@@ -5,30 +5,35 @@
 </head>
 <body>
 
-    <h1>Novo Compromisso</h1>
+<h1>Novo Compromisso</h1>
 
-    {% if messages %}
-        {% for message in messages %}
-            <p style="color: red;">{{ message }}</p>
-        {% endfor %}
-    {% endif %}
+{% if messages %}
+    {% for message in messages %}
+        <p style="color: red;">{{ message }}</p>
+    {% endfor %}
+{% endif %}
 
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
 
-        <button type="submit">Salvar compromisso</button>
-    </form>
+    <button type="submit">Salvar compromisso</button>
+    <a href="{% url 'lista_compromissos' %}">Cancelar</a>
+</form>
 
-    {% if request.session.confirmar_sobrescrita %}
-    <script>
-        if (confirm("Já existe um compromisso nesse horário. Deseja sobrescrever?")) {
+{% if request.session.confirmar_sobrescrita %}
+<script>
+    (function() {
+        let deseja = confirm("Já existe um compromisso nesse horário. Deseja sobrescrever?");
+        if (deseja) {
             window.location.href = "{% url 'sobrescrever_compromisso' %}";
         } else {
             alert("Criação cancelada.");
+            window.location.href = "{% url 'novo_compromisso' %}";
         }
-    </script>
-    {% endif %}
+    })();
+</script>
+{% endif %}
 
 </body>
 </html>

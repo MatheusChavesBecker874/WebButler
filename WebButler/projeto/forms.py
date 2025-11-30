@@ -53,7 +53,7 @@ class CompromissoForm(forms.ModelForm):
             }),
             "lembrete_minutos": forms.NumberInput(attrs={
                 "class": "form-control",
-                "min": 1,
+                "min": 0,
                 "placeholder": "30"
             }),
         }

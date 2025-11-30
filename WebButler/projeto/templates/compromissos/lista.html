@@ -5,21 +5,49 @@
 </head>
 <body>
 
-    <h1>Meus Compromissos</h1>
+<h1>Meus Compromissos</h1>
 
-    <a href="{% url 'novo_compromisso' %}">+ Novo compromisso</a>
+<a href="{% url 'novo_compromisso' %}">+ Novo compromisso</a>
 
-    <ul>
-        {% for c in compromissos %}
-            <li>
-                <strong>{{ c.titulo }}</strong><br>
-                De {{ c.data_inicio }} até {{ c.data_fim }}<br>
-                Lembrete: {{ c.lembrete_minutos }} min antes
-            </li>
-        {% empty %}
-            <li>Nenhum compromisso cadastrado</li>
-        {% endfor %}
-    </ul>
+{% if messages %}
+    {% for m in messages %}
+        <p style="color: green;">{{ m }}</p>
+    {% endfor %}
+{% endif %}
+
+<ul>
+    {% for c in compromissos %}
+        <li style="margin-bottom: 15px;">
+
+            <strong>{{ c.titulo }}</strong><br>
+
+            De: {{ c.data_inicio|date:"d/m/Y H:i" }}<br>
+            Até: {{ c.data_fim|date:"d/m/Y H:i" }}<br>
+
+            Lembrete: {{ c.lembrete_minutos }} min antes<br>
+
+            {% if c.recorrente %}
+                <a href="{% url 'remover_recorrente' c.id %}"
+                   style="color: red;"
+                   onclick="return confirm('Deseja remover SOMENTE esta ocorrência ou toda recorrência?');">
+                    Remover recorrente
+                </a>
+            {% else %}
+                <a href="{% url 'remover_compromisso' c.id %}"
+                   style="color: red;"
+                   onclick="return confirm('Deseja realmente remover este compromisso?');">
+                    Remover
+                </a>
+            {% endif %}
+
+        </li>
+    {% empty %}
+        <li>Nenhum compromisso cadastrado.
+            <br>
+            <a href="{% url 'novo_compromisso' %}">Criar o primeiro compromisso</a>
+        </li>
+    {% endfor %}
+</ul>
 
 </body>
 </html>

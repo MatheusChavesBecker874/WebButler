@@ -103,6 +103,23 @@ class Compromisso(models.Model):
 
     lembrete_minutos = models.IntegerField(default=30)
 
+    # indica se é um compromisso recorrente semanal
+    recorrente = models.BooleanField(default=False)
+    dia_semana = models.CharField(
+        max_length=10,
+        null=True,
+        blank=True,
+        choices=[
+            ("seg", "Segunda"),
+            ("ter", "Terça"),
+            ("qua", "Quarta"),
+            ("qui", "Quinta"),
+            ("sex", "Sexta"),
+            ("sab", "Sábado"),
+            ("dom", "Domingo"),
+        ],
+    )
+
     criado_em = models.DateTimeField(auto_now_add=True)
 
     def clean(self):
@@ -128,3 +145,15 @@ class Compromisso(models.Model):
 
     def __str__(self):
         return f"{self.titulo} ({self.data_inicio} - {self.data_fim})"
+
+
+class CompromissoRecorrenciaExcecao(models.Model):
+    compromisso = models.ForeignKey(
+        Compromisso,
+        on_delete=models.CASCADE,
+        related_name="excecoes",
+    )
+    data = models.DateField()
+
+    def __str__(self):
+        return f"Exceção em {self.data} para {self.compromisso.titulo}"

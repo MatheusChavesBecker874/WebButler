@@ -5,16 +5,23 @@
 </head>
 <body>
 
-<h2>Tem certeza que deseja remover o compromisso?</h2>
+<h2>Tem certeza que deseja remover este compromisso?</h2>
 
-<p><strong>{{ compromisso.titulo }}</strong></p>
-<p>{{ compromisso.data_inicio }} até {{ compromisso.data_fim }}</p>
+<p>
+    <strong>{{ compromisso.titulo }}</strong><br>
+    {{ compromisso.data_inicio|date:"d/m/Y H:i" }} até {{ compromisso.data_fim|date:"d/m/Y H:i" }}
+</p>
 
 <form method="post">
     {% csrf_token %}
-    <button type="submit">Sim, remover</button>
-    <a href="{% url 'lista_compromissos' %}">
-        <button type="button">Cancelar</button>
+
+    <button type="submit" style="color: white; background: red; padding: 8px 15px; border: none;">
+        Sim, remover
+    </button>
+
+    <a href="{% url 'lista_compromissos' %}"
+       style="margin-left: 10px; padding: 8px 15px; background: #ccc; text-decoration:none;">
+        Cancelar
     </a>
 </form>
 

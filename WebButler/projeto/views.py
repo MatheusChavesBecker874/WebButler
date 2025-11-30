@@ -268,9 +268,36 @@ def sobrescrever_compromisso(request):
 def remover_compromisso(request, id):
     compromisso = get_object_or_404(Compromisso, id=id)
 
+    if compromisso.recorrente:
+        return redirect("remover_recorrente", id=id)
+
     if request.method == "POST":
         compromisso.delete()
         messages.success(request, "Compromisso removido com sucesso!")
         return redirect("lista_compromissos")
 
     return render(request, "compromissos/confirmar_remocao.html", {"compromisso": compromisso})
+
+@login_required
+def remover_recorrente(request, id):
+    compromisso = get_object_or_404(Compromisso, id=id)
+
+    if request.method == "POST":
+        acao = request.POST.get("acao")
+
+        if acao == "ocorrencia":
+            CompromissoRecorrenciaExcecao.objects.create(
+                compromisso=compromisso,
+                data=compromisso.data_inicio.date()
+            )
+            messages.success(request, "Ocorrência removida com sucesso!")
+            return redirect("lista_compromissos")
+
+        elif acao == "todos":
+            compromisso.delete()
+            messages.success(request, "Todas as ocorrências foram removidas.")
+            return redirect("lista_compromissos")
+
+    return render(request, "compromissos/remover_recorrente.html", {
+        "compromisso": compromisso
+    })
