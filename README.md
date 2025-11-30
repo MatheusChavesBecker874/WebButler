@@ -16,6 +16,8 @@ Jira: https://webbutler.atlassian.net/jira/software/projects/SCRUM/boards/1/back
 
 Figma: Historia 1: https://www.figma.com/design/AHKBhx9wZhoBsei5lzp05a/Sem-t%C3%ADtulo?node-id=0-1&t=4MdQMe8am0GQa8Cw-1
 
+Print Backlog com histórias: <img width="1914" height="871" alt="image" src="https://github.com/user-attachments/assets/5cef378d-c97d-4b83-805d-d86c2c444efa" />
+
 # Entrega 2:
 Figma: Historia 2: https://www.figma.com/design/wwCUGoXPgeHjb9XLv7MTzW/Sem-t%C3%ADtulo?node-id=4-26&t=QW4bnxsLgp4Gapeu-1
 
@@ -23,9 +25,11 @@ Jira: https://webbutler.atlassian.net/jira/software/projects/SCRUM/boards/1/back
 
 link do deployment: https://webbutler.onrender.com/
 
-link para o vídeo no youtube (Screamcast): https://youtu.be/h9BqOtRP3Nk
+link para o vídeo no youtube (Screencast): https://youtu.be/h9BqOtRP3Nk
 
 Print quadro de Sprints2: <img width="1345" height="674" alt="Screenshot_Sprints2" src="https://github.com/user-attachments/assets/e705c6a2-2a31-448f-b5ad-98ad74464285" />
+
+Print dos Scrum implementados: <img width="2034" height="91" alt="image" src="https://github.com/user-attachments/assets/57aebb89-7462-4778-bb19-40e179cf5aa9" />
 
 # Entrega 3:
 deployment Azure: webbutler-f2cddtg5a6dvfvej.brazilsouth-01.azurewebsites.net
@@ -33,3 +37,9 @@ deployment Azure: webbutler-f2cddtg5a6dvfvej.brazilsouth-01.azurewebsites.net
 link para o video de testes automatizados no youtube (Screencast): https://youtu.be/zrH-moXK8fk
 
 link para o video da pipeline da aplicação no youtube (Screencast): https://youtu.be/4E5UrBiRVgU
+
+Print das duas histórias implementadas: <img width="2029" height="58" alt="image" src="https://github.com/user-attachments/assets/2b4a1043-93c4-4187-984c-7d89aa69b10d" />
+
+Programação em par: A programação em par continuou sem ser utilizada devido á pouca adequação dos integrantes com a metodologia, além de também ser uma equipe com apenas duas pessoas, o que tornou ainda mais difícil sua aplicação e aprendizado sem maiores complicações. Opitamos por não utilizá-la, visto que poderíamos conseguir nos adequar melhor sem ela e com nossa própria organização para o programa.
+
+# Entrega 4:
