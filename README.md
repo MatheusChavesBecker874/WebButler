@@ -47,6 +47,7 @@ Programação em par: A programação em par continuou sem ser utilizada devido 
 Print Jira: <img width="858" height="592" alt="Screenshot_23" src="https://github.com/user-attachments/assets/3c043bfd-40f6-4b8d-b8b7-6773c4cca608" />
 
 Screean cast: 
+
 https://github.com/user-attachments/assets/bd5f48f5-7532-40c3-963a-764a12c7af4c
 
 https://youtu.be/Fy6LDhHUkBg (Youtube)
