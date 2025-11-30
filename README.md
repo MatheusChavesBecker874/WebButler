@@ -43,3 +43,10 @@ Print das duas histórias implementadas: <img width="2029" height="58" alt="imag
 Programação em par: A programação em par continuou sem ser utilizada devido á pouca adequação dos integrantes com a metodologia, além de também ser uma equipe com apenas duas pessoas, o que tornou ainda mais difícil sua aplicação e aprendizado sem maiores complicações. Opitamos por não utilizá-la, visto que poderíamos conseguir nos adequar melhor sem ela e com nossa própria organização para o programa.
 
 # Entrega 4:
+
+Print Jira: <img width="858" height="592" alt="Screenshot_23" src="https://github.com/user-attachments/assets/3c043bfd-40f6-4b8d-b8b7-6773c4cca608" />
+
+Screean cast: 
+https://github.com/user-attachments/assets/bd5f48f5-7532-40c3-963a-764a12c7af4c
+
+
