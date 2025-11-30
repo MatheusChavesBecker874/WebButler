@@ -48,6 +48,7 @@ Print Jira: <img width="858" height="592" alt="Screenshot_23" src="https://githu
 
 Screean cast: 
 https://github.com/user-attachments/assets/bd5f48f5-7532-40c3-963a-764a12c7af4c
-https://youtu.be/Fy6LDhHUkBg (youtube)
+
+https://youtu.be/Fy6LDhHUkBg (Youtube)
 
 
